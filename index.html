@@ -119,18 +119,23 @@
 
     <!-- Musica de Fondo - Bésame -->
     <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
         Tu navegador no soporta audio.
     
 
     <script>
         const audio = document.getElementById('bgMusic');
-        audio.currentTime = 52; // 🔴 EMPIEZA EN EL SEGUNDO 52
+        
+        // Función para iniciar la música en el segundo 52
+        function startMusic() {
+            audio.currentTime = 52; // 🕒 EMPIEZA EN SEGUNDO 52
+            audio.play().catch(e => console.log("Esperando interacción..."));
+            document.getElementById('musicIcon').innerHTML = '🔊';
+        }
 
         function toggleMusic() {
             if(audio.paused) {
-                audio.play();
-                document.getElementById('musicIcon').innerHTML = '🔊';
+                startMusic();
             } else {
                 audio.pause();
                 document.getElementById('musicIcon').innerHTML = '🔇';
@@ -205,11 +210,10 @@
             }
         }
 
-        // Reproducir audio al interactuar por primera vez
+        // Iniciar música apenas toquen cualquier parte
         document.body.addEventListener('click', () => {
             if(audio.paused) {
-                audio.play();
-                document.getElementById('musicIcon').innerHTML = '🔊';
+                startMusic();
             }
         }, { once: true });
     </script>
