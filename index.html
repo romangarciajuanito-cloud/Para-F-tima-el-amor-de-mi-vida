@@ -51,57 +51,46 @@
 </head>
 <body class="text-gray-800">
 
-    <!-- Contenedor Principal -->
     <div class="container mx-auto px-4 py-10 max-w-2xl relative">
         
-        <!-- Tarjeta -->
         <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl p-8 md:p-12 text-center relative overflow-hidden">
             
-            <!-- Icono de Musica -->
             <div id="musicIcon" class="absolute top-4 right-4 text-2xl text-pink-500 cursor-pointer" onclick="toggleMusic()">
                 🎵
             </div>
 
-            <!-- Titulo -->
             <h1 class="cursive text-5xl md:text-6xl text-pink-600 mb-8">Para Ti ❤️</h1>
 
-            <!-- Mensaje 1 -->
             <div id="msg1" class="content-block mb-8">
                 <p class="text-lg leading-relaxed">
                     Aunque el tiempo pase y no pueda verte todos los días, quiero que sepas que lo que siento por ti no cambia. No importa la distancia ni los momentos en los que no estamos juntos, porque en mi mente y en mi corazón sigues estando presente siempre.
                 </p>
             </div>
 
-            <!-- Boton 1 -->
             <button onclick="showNext(2)" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-all transform hover:scale-105 my-4">
                 Toca aquí ❤️
             </button>
 
-            <!-- Mensaje 2 -->
             <div id="msg2" class="content-block hidden mb-8">
                 <p class="text-lg leading-relaxed">
                     A veces la vida nos separa físicamente, pero nunca va a poder separar lo que siento por ti. Porque incluso en los días más normales, en los momentos más simples, hay algo que me recuerda a ti. Y es ahí cuando entiendo que lo que siento es real, fuerte y sincero.
                 </p>
             </div>
 
-            <!-- Boton 2 -->
             <button onclick="showNext(3)" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-all transform hover:scale-105 my-4 hidden" id="btn2">
                 Otra sorpresa ✨
             </button>
 
-            <!-- Mensaje 3 -->
             <div id="msg3" class="content-block hidden mb-8">
                 <p class="text-lg leading-relaxed">
                     No necesito verte todos los días para quererte, porque mi cariño por ti no depende del tiempo ni del espacio, depende de lo que eres tú para mí. Y tú eres alguien muy importante, alguien que llegó a mi vida y la cambió.
                 </p>
             </div>
 
-            <!-- Boton Lluvia -->
             <button onclick="makeItRain()" class="bg-pink-400 hover:bg-pink-500 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-all transform hover:scale-105 my-4 hidden" id="btnRain">
                 Haz llover flores 🌸
             </button>
 
-            <!-- Mensaje Final -->
             <div id="msgFinal" class="content-block hidden mt-8 pt-6 border-t border-pink-200">
                 <p class="text-lg italic">
                     Solo quería recordarte que te extraño... pero no es un simple "te extraño", es ese sentimiento que aparece cuando todo me recuerda a ti ❤️
@@ -117,32 +106,30 @@
         </div>
     </div>
 
-    <!-- Musica de Fondo - Bésame -->
+    <!-- MÚSICA DE BÉSAME - TU ENLACE DIRECTO -->
     <audio id="bgMusic" loop>
-        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+        <source src="https://files.catbox.moe/gip5tm.m4a" type="audio/mp4">
         Tu navegador no soporta audio.
     
 
     <script>
         const audio = document.getElementById('bgMusic');
         
-        // Función para iniciar la música en el segundo 52
-        function startMusic() {
-            audio.currentTime = 52; // 🕒 EMPIEZA EN SEGUNDO 52
-            audio.play().catch(e => console.log("Esperando interacción..."));
+        function iniciarMusica() {
+            audio.currentTime = 52; // 🕒 EMPIEZA EXACTAMENTE EN EL SEGUNDO 52
+            audio.play().catch(e => console.log("Listo para sonar!"));
             document.getElementById('musicIcon').innerHTML = '🔊';
         }
 
         function toggleMusic() {
             if(audio.paused) {
-                startMusic();
+                iniciarMusica();
             } else {
                 audio.pause();
                 document.getElementById('musicIcon').innerHTML = '🔇';
             }
         }
 
-        // Control de mensajes
         function showNext(n) {
             document.getElementById(`msg${n-1}`).classList.add('hidden');
             document.getElementById(`msg${n}`).classList.remove('hidden');
@@ -154,7 +141,6 @@
                 document.getElementById('btn2').classList.add('hidden');
                 document.getElementById('btnRain').classList.remove('hidden');
             } else if (n === 2) {
-                event.preventDefault();
                 document.getElementById('btn2').classList.remove('hidden');
                 setTimeout(() => {
                     document.getElementById('btn2').classList.add('show');
@@ -162,18 +148,15 @@
             }
         }
 
-        // Iniciar primera animacion
         window.onload = () => {
             setTimeout(() => {
                 document.getElementById('msg1').classList.add('show');
             }, 300);
         };
 
-        // Lluvia de flores y corazones
         function makeItRain() {
             createHearts(30);
             createPetals(20);
-            // Mostrar mensaje final despues de la lluvia
             setTimeout(() => {
                 document.getElementById('btnRain').classList.add('hidden');
                 document.getElementById('msgFinal').classList.remove('hidden');
@@ -210,10 +193,10 @@
             }
         }
 
-        // Iniciar música apenas toquen cualquier parte
+        // Iniciar música al primer clic
         document.body.addEventListener('click', () => {
             if(audio.paused) {
-                startMusic();
+                iniciarMusica();
             }
         }, { once: true });
     </script>
